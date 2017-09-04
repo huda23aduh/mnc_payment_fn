@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="Payment_job_scheduling.exe" version="1.0.0.1" publicKeyToken="5c54f3135377111d" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="Payment_job_scheduling" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="Payment_job_scheduling.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MySql.Data.dll" size="424448">
+      <assemblyIdentity name="MySql.Data" version="6.9.9.0" publicKeyToken="C5687FC88969C44D" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>z1JCyodj5/UiC37FF0m11VPrQRt8tszqKfa8jk+yNYc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="653824">
+      <assemblyIdentity name="Newtonsoft.Json" version="10.0.0.0" publicKeyToken="30AD4FE6B2A6AEED" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>lz/XDOSOWsQzoQG0KHFoDFHi/roq7sPUAN6kEVrzong=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Oracle.ManagedDataAccess.dll" size="4877312">
+      <assemblyIdentity name="Oracle.ManagedDataAccess" version="4.122.1.0" publicKeyToken="89B483F429C47342" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>DYrMyQdPkxpDGIGWRmi2mfZUivi2Sk7TEdSEaxygQ3Y=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Payment_job_scheduling.exe" size="13808">
+      <assemblyIdentity name="Payment_job_scheduling" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>7wiLTuuHZml5aGAjctbURcYNXk9Kw08Eh58UvoQixZo=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="Payment_job_scheduling.exe.config" size="2029">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>IqSu+6ZqQGp2Fj39D4BwBk80xbiTk9wVnO8CaBw7BiU=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=DESKTOP-BRK3ODF\analyst" issuerKeyHash="0088ec4994335340002a6caa29dd58279b810120" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>qh1SwWZ9ISkqYcl/ZEAr1iMcMlCz4LFtwAWBDRJ8DGw=</DigestValue></Reference></SignedInfo><SignatureValue>hC2+FpkimOef3CxAKnNVQAAjCuVKRQAjTV8ZfeOzFSoW5jpDb4jvxezBhjReJUya8NxJYUpTjkaTsBzoIO0zXjD3MgRv4uDVVbdONZ01WLE1LzKf9c7TtxT8P8w/g7oCksRJWXfCQB+zKv7zSBi5T/i8txe+9t380IdBR+pqtqA=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>3CoKFyO/S5Anq83MVPw0P0FMjH2W56yPxW2iFAMTXelidlVMoVmQVvpemWTwknZojXIbW+CDBjwSNSeEn3ChkZM1PSBEWbUaQWycOZtCSZZUe5OlW8f/kz+PDlrcc4PPeazkGh/SdpmSdJv16kGAkXot9bVsy+UK/Zs07PPlYqs=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="6c0c7c120d8105c06db1e0b350321c23d62b40647fc9612a29217d66c1521daa" Description="" Url=""><as:assemblyIdentity name="Payment_job_scheduling.exe" version="1.0.0.1" publicKeyToken="5c54f3135377111d" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=DESKTOP-BRK3ODF\analyst</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>m1VkgSnKQD/emTANomzle2JAbFv6IPpa2Uq7S6/+FD8=</DigestValue></Reference></SignedInfo><SignatureValue>req7HXQOezSUlytoKWdAX9LLY5cbzGSG9W+kcbgY16vM4EAGSX/L0YX6keB4BfTBNhiojkWE6AvTNPuvUR8VSjbLwJBgdrVysMAqJL7UZ7YkNo7LJQmxdGDaYQzxRqsGuNXRrRCgzgqgDgidGut05ysuVydEGA/0VN7R9a9pShQ=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>3CoKFyO/S5Anq83MVPw0P0FMjH2W56yPxW2iFAMTXelidlVMoVmQVvpemWTwknZojXIbW+CDBjwSNSeEn3ChkZM1PSBEWbUaQWycOZtCSZZUe5OlW8f/kz+PDlrcc4PPeazkGh/SdpmSdJv16kGAkXot9bVsy+UK/Zs07PPlYqs=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB9TCCAV6gAwIBAgIQFRYNaSg6+IRMzRbb8C+hnTANBgkqhkiG9w0BAQsFADA5MTcwNQYDVQQDHi4ARABFAFMASwBUAE8AUAAtAEIAUgBLADMATwBEAEYAXABhAG4AYQBsAHkAcwB0MB4XDTE3MDcyMTA2MTMyMloXDTE4MDcyMTEyMTMyMlowOTE3MDUGA1UEAx4uAEQARQBTAEsAVABPAFAALQBCAFIASwAzAE8ARABGAFwAYQBuAGEAbAB5AHMAdDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA3CoKFyO/S5Anq83MVPw0P0FMjH2W56yPxW2iFAMTXelidlVMoVmQVvpemWTwknZojXIbW+CDBjwSNSeEn3ChkZM1PSBEWbUaQWycOZtCSZZUe5OlW8f/kz+PDlrcc4PPeazkGh/SdpmSdJv16kGAkXot9bVsy+UK/Zs07PPlYqsCAwEAATANBgkqhkiG9w0BAQsFAAOBgQDV7eSGlVprJdbzwW+Bs/dH6cKrzrNAW3T6+4bAauxHogK3lBm0hg/LkxpKVanQhYcGwmJQ0sa2nA7sRV0nSF3Jg4Mek5y9+D6DyIVQ+Z1EJnpbW8Ii/IlyGLpha4kEELpT8kp5bMIXpj/P+ej0ygIywG/wI7TYD0cvWkOVb1dZ9A==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
