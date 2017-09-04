@@ -22,7 +22,6 @@ namespace Payment_job_scheduling
 
         static string createText = null;
         static string createText_temp = null;
-        static string information = null;
         static string path = @"c:\Log_folder_payment_icc_job\";
         static string file_log_name = null;
         static string full_path_file = null;
@@ -33,6 +32,8 @@ namespace Payment_job_scheduling
         static string mysql_max_row_trx_table = "MAX_ROW_TRX";
         static string mysql_fn_trx_mirror_table = "FN_TRX_PAYMENT";
         static string mysql_fn_trx_problem_table = "FN_TRX_PROBLEM_1";
+        static string mysql_prospect_icc_table = "PROSPECT_ICC";
+
         static string oracle_fn_trx_payment_table = "fn_trx_payment@igateway";
         static string oracle_master_inquiry_table = "indovision.cust_inquiry@igateway";
 
@@ -42,8 +43,6 @@ namespace Payment_job_scheduling
 
         static void Main(string[] args)
         {
-            
-
             string a = get_max_trx_id();
             int max_id_mysql = Int32.Parse(a);
             int max_trx_id_oracle = Int32.Parse(get_max_idseq_trx_table_in_oracle());
@@ -105,6 +104,63 @@ namespace Payment_job_scheduling
 
                     //assign_info_to_variable("Error: {0}" + ex1.ToString() + Environment.NewLine);
 
+                    checking_file_log();
+
+                    write_info_to_log_file();
+                }
+
+                Console.WriteLine("Error: {0}", ex.ToString());
+
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return max_id;
+        }
+        static string count_in_prospect_icc_table_mysql(string cust_no)
+        {
+            string max_id = null;
+            MySqlConnection conn = null;
+            MySqlTransaction transaction = null;
+
+            try
+            {
+                conn = new MySqlConnection(cs_mysql);
+                conn.Open();
+                transaction = conn.BeginTransaction();
+
+                MySqlCommand command = new MySqlCommand();
+                command.Connection = conn;
+                command.Transaction = transaction;
+                command.CommandText = @"SELECT COUNT(PROSPECT_CUST_NO) FROM PROSPECT_ICC WHERE PROSPECT_CUST_NO='" + cust_no + "'";
+
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    string result = reader.GetString(0);
+                    max_id = result;
+                }
+
+
+            }
+            catch (MySqlException ex)
+            {
+                try
+                {
+                    transaction.Rollback();
+
+                }
+                catch (MySqlException ex1)
+                {
+                    sb.Append("Error: {0}" + ex1.ToString() + Environment.NewLine);
+                    
                     checking_file_log();
 
                     write_info_to_log_file();
@@ -221,6 +277,22 @@ namespace Payment_job_scheduling
                             data[a] = dr.GetValue(a).ToString();
                         }
 
+                        if(data[1].Substring(0,1) == "5") //HANDLE IF CUST_NUMBER IS PROSPECT_NUMBER
+                        {
+                            insert_to_prospect_icc_table_mysql(data);
+
+                            sb.Append("insert to PROSPECT_ICC mysql table#" + data[1] + '#' + data[10] + '#' + data[2] + "#" + DateTime.Now.ToString("dd_M_yyyy_HH:mm:ss") + Environment.NewLine);
+                            checking_file_log();
+                            write_info_to_log_file();
+
+                            string total_data_prospect_no = count_in_prospect_icc_table_mysql(data[1]);
+                            int x = Int32.Parse(total_data_prospect_no);
+
+                            if(x == 1)
+                                break;
+
+                        }
+
                         string cust_id = cust_no_convertion(data[1]);
                         
                         string merchant_bank = data[8] + "_" + data[9];
@@ -267,7 +339,7 @@ namespace Payment_job_scheduling
                             do_insert_to_fn_trx_problem_mysql(data);
                             #endregion insert data to mysql problem table
 
-                             the_string = "insert to problem table#" + data[1] + '#' + data[10] + '#' + data[2] + '#' + merchant_bank + "#" + DateTime.Now.ToString("dd_M_yyyy_HH:mm:ss")+ "#error catch (Exception ex)" + Environment.NewLine;
+                            the_string = "insert to problem table#" + data[1] + '#' + data[10] + '#' + data[2] + '#' + merchant_bank + "#" + DateTime.Now.ToString("dd_M_yyyy_HH:mm:ss")+ "#error catch (Exception ex)" + Environment.NewLine;
 
                             sb.Append(the_string);
 
@@ -395,6 +467,71 @@ namespace Payment_job_scheduling
                     
                     sb.Append("Error: {0}" + ex1.ToString() + Environment.NewLine);
                     
+                    checking_file_log();
+
+                    write_info_to_log_file();
+                }
+
+                Console.WriteLine("Error: {0}", ex.ToString());
+
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+        }
+        static void insert_to_prospect_icc_table_mysql(string[] data)
+        {
+
+            MySqlConnection conn = null;
+            MySqlTransaction transaction = null;
+
+            try
+            {
+                conn = new MySqlConnection(cs_mysql);
+                conn.Open();
+                transaction = conn.BeginTransaction();
+
+                MySqlCommand command = new MySqlCommand();
+                command.Connection = conn;
+                command.Transaction = transaction;
+
+                command.CommandText = @"INSERT INTO " + mysql_prospect_icc_table + " (PROSPECT_CUST_NO, ICC_CUST_NO, AMOUNT, TGLPAY, ID_PAY, MERCHANT) VALUES (?PROSPECT_CUST_NO, ?ICC_CUST_NO, ?AMOUNT, ?TGLPAY, ?ID_PAY, ?MERCHANT)";
+
+                command.Parameters.AddWithValue("?PROSPECT_CUST_NO", data[0]);
+                command.Parameters.AddWithValue("?ICC_CUST_NO", "0");
+                command.Parameters.AddWithValue("?AMOUNT", data[2]);
+                command.Parameters.AddWithValue("?TGLPAY", data[0]);
+                command.Parameters.AddWithValue("?ID_PAY", data[13]);
+                command.Parameters.AddWithValue("?MERCHANT", data[8]+ " " +data[9]);
+
+                command.ExecuteNonQuery();
+                transaction.Commit();
+
+                Console.WriteLine("successfully inserted to " + mysql_prospect_icc_table);
+                sb.Append("successfully inserted to " + mysql_prospect_icc_table + Environment.NewLine);
+
+                checking_file_log();
+
+                write_info_to_log_file();
+
+            }
+            catch (MySqlException ex)
+            {
+                try
+                {
+                    transaction.Rollback();
+
+                }
+                catch (MySqlException ex1)
+                {
+
+                    sb.Append("Error: {0}" + ex1.ToString() + Environment.NewLine);
+
                     checking_file_log();
 
                     write_info_to_log_file();
@@ -932,10 +1069,7 @@ namespace Payment_job_scheduling
                     result = x + y;
                 }
 
-                if(cust_nbr.Length == 10) // for handle cust_no of prospect
-                {
-                    result = get_icc_cust_nbr_from_prospect_table_mysql(cust_nbr);
-                }
+                
             }
             if (cust_nbr.Length == 9)
                 result = cust_nbr;
